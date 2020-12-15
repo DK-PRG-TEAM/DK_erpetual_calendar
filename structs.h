@@ -18,6 +18,7 @@
 //int test[1] = {0};
 
 typedef struct {
+    int yearNum;
     int monthNum;
     struct {
         int *p;
@@ -32,7 +33,8 @@ typedef struct {
 }Months;
 
 typedef struct {
-    Months months;
+    Months *months;
+    int length;
 }Year;
 
 typedef struct {
