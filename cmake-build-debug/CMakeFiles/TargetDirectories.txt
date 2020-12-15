@@ -1,0 +1,3 @@
+F:/project/DK_erpetual_calendar/cmake-build-debug/CMakeFiles/DK_erpetual_calendar.dir
+F:/project/DK_erpetual_calendar/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/project/DK_erpetual_calendar/cmake-build-debug/CMakeFiles/rebuild_cache.dir
