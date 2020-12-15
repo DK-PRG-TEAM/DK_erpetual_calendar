@@ -7,11 +7,12 @@ int manyYearToDays(int startYear,int endYear);
 void setThisVarToThisMonthCalenderArray(Month *target, int year, int month);
 void printThisMonthCalender(Month *month);
 void printManyMonthsCalender(int year, int startMonth, int endMonth);
+void setThisVarToThisYearCalenderArray(Year *target, int year);
 void printThisYearCalender(int year);
 void printManyYearsCalender(int startYear, int endYear);
 int main(){
     Month month;
-    setThisVarToThisMonthCalenderArray(&month,2020,12);
+    setThisVarToThisMonthCalenderArray(&month,2020,2);
     printThisMonthCalender(&month);
 
 //    int y,m,d,y1,m1,d1,togetherYears,sumDays,startDate[3],endDate[3];
@@ -103,7 +104,7 @@ int getThisMonthDays(int year,int month){
 //}
 
 void setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
-
+    target->yearNum = year;
     target->monthNum = month;
     target->data.length = getThisMonthDays(year,month);
 //    target->data.p = isCommonYear(year) ? commonMonth : leapYearMonth;
@@ -130,7 +131,7 @@ void setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
 
 
 void printThisMonthCalender(Month *month){
-    cout<<"第"<<"["<<month->monthNum<<"]"<<"月"<<endl;
+    cout<<"["<<month->yearNum<<"]"<<"年"<<"第"<<"["<<month->monthNum<<"]"<<"月"<<endl;
     for (int i = 0; i < month->data.length; i++) {
         cout<<month->data.p[i]<<"\t";
         if (month->data.p[i] % 5 == 0){
