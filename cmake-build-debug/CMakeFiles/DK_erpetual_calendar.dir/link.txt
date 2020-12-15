@@ -1,3 +1,0 @@
-"E:\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\DK_erpetual_calendar.dir/objects.a
-E:\mingw64\bin\ar.exe cr CMakeFiles\DK_erpetual_calendar.dir/objects.a @CMakeFiles\DK_erpetual_calendar.dir\objects1.rsp
-E:\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\DK_erpetual_calendar.dir/objects.a -Wl,--no-whole-archive  -o DK_erpetual_calendar.exe -Wl,--out-implib,libDK_erpetual_calendar.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DK_erpetual_calendar.dir\linklibs.rsp
