@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/project/DK_erpetual_calendar/consts.h
+
+F:/project/DK_erpetual_calendar/main.cpp
+main.h
+F:/project/DK_erpetual_calendar/main.h
+
+F:/project/DK_erpetual_calendar/main.h
+stdio.h
+-
+stdbool.h
+-
+iostream
+-
+structs.h
+F:/project/DK_erpetual_calendar/structs.h
+consts.h
+F:/project/DK_erpetual_calendar/consts.h
+
+F:/project/DK_erpetual_calendar/structs.h
+
