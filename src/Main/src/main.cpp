@@ -166,9 +166,9 @@ void AutomaticCalender::setThisVarToThisYearCalenderArray(Year *target, int year
     cout<<endl;
 }
 
-void AutomaticCalender::printThisYearCalender(Year *target) {
-    for (int i = 0; i <target->data.months->length; ++i) {
-        printThisMonthCalender(target->data.months[i].month);
+void AutomaticCalender::printThisYearCalender(Year *year) {
+    for (int i = 0; i <year->data.months->length; ++i) {
+        printThisMonthCalender(year->data.months[i].month);
     }
 }
 
