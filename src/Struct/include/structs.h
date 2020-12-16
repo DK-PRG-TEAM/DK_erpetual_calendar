@@ -33,8 +33,10 @@ typedef struct {
 }Months;
 
 typedef struct {
-    Months *months;
-    int length;
+    int year;
+    struct {
+        Months *months;
+    }data;
 }Year;
 
 typedef struct {
