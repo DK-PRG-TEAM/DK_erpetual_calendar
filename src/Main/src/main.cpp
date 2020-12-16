@@ -1,20 +1,21 @@
 #include "../include/main.h"
 
-bool isCommonYear(int year);
-int getThisMonthDays(int year,int month);
-int monthToDays(int year, int startMonth, int endMonth);
-int manyYearToDays(int startYear,int endYear);
-//void getThisMonthCalender(int year, int month);
-void setThisVarToThisMonthCalenderArray(Month *target, int year, int month);
-void printThisMonthCalender(Month *month);
-void printManyMonthsCalender(int year, int startMonth, int endMonth);
-void setThisVarToThisYearCalenderArray(Year *target, int year);
-void printThisYearCalender(int year);
-void printManyYearsCalender(int startYear, int endYear);
+//bool isCommonYear(int year);
+//int getThisMonthDays(int year,int month);
+//int monthToDays(int year, int startMonth, int endMonth);
+//int manyYearToDays(int startYear,int endYear);
+////void getThisMonthCalender(int year, int month);
+//void setThisVarToThisMonthCalenderArray(Month *target, int year, int month);
+//void printThisMonthCalender(Month *month);
+//void printManyMonthsCalender(int year, int startMonth, int endMonth);
+//void setThisVarToThisYearCalenderArray(Year *target, int year);
+//void printThisYearCalender(int year);
+//void printManyYearsCalender(int startYear, int endYear);
 int main(){
     Month month;
-    setThisVarToThisMonthCalenderArray(&month,2020,2);
-    printThisMonthCalender(&month);
+    AutomaticCalender automaticCalender;
+    automaticCalender.setThisVarToThisMonthCalenderArray(&month,2020,2);
+    automaticCalender.printThisMonthCalender(&month);
 
 //    int y,m,d,y1,m1,d1,togetherYears,sumDays,startDate[3],endDate[3];
 //    printf("Input start date:(EXP:2020,10,1)\n");
@@ -53,7 +54,7 @@ int main(){
 //    return 0;
 }
 
-bool isCommonYear(int year){
+bool AutomaticCalender::isCommonYear(int year){
     if (year % 4 == 0){
         if (year % 100 == 0){
             if (year % 400 == 0){
@@ -71,7 +72,7 @@ bool isCommonYear(int year){
         return true;
     }
 }
-int getThisMonthDays(int year,int month){
+int AutomaticCalender::getThisMonthDays(int year,int month){
 //    int *persentYearMonth = isCommonYear(year)?commonMonth:leapYearMonth;
 //    return persentYearMonth[month-1];
     return isCommonYear(year)?commonMonth[month-1]:leapYearMonth[month-1];
@@ -104,7 +105,7 @@ int getThisMonthDays(int year,int month){
 //	return resultDays;
 //}
 
-void setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
+void AutomaticCalender::setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
     target->yearNum = year;
     target->monthNum = month;
     target->data.length = getThisMonthDays(year,month);
@@ -133,7 +134,7 @@ void setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
 }
 
 
-void printThisMonthCalender(Month *month){
+void AutomaticCalender::printThisMonthCalender(Month *month){
     cout<<"["<<month->yearNum<<"]"<<"Äê"<<"µÚ"<<"["<<month->monthNum<<"]"<<"ÔÂ"<<endl;
     for (int i = 0; i < month->data.length; i++) {
         cout<<month->data.p[i]<<"\t";
@@ -184,7 +185,7 @@ void printThisMonthCalender(Month *month){
 //    int length;
 //}Years;
 
-Month month;
+
 void test(){
 //    Month *months = new Month[5];
     Months months;
