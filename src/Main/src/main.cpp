@@ -12,11 +12,14 @@
 //void printThisYearCalender(int year);
 //void printManyYearsCalender(int startYear, int endYear);
 int main(){
-    Month month;
     AutomaticCalender automaticCalender;
-    automaticCalender.setThisVarToThisMonthCalenderArray(&month,2020,2);
-    automaticCalender.printThisMonthCalender(&month);
+//    Month month;
+//    automaticCalender.setThisVarToThisMonthCalenderArray(&month,2020,2);
+//    automaticCalender.printThisMonthCalender(&month);
 
+    Year year;
+    automaticCalender.setThisVarToThisYearCalenderArray(&year,2020);
+    automaticCalender.printThisYearCalender(&year);
 //    int y,m,d,y1,m1,d1,togetherYears,sumDays,startDate[3],endDate[3];
 //    printf("Input start date:(EXP:2020,10,1)\n");
 //    scanf("%d,%d,%d",&startDate[0],&startDate[1],&startDate[2]);
@@ -143,6 +146,30 @@ void AutomaticCalender::printThisMonthCalender(Month *month){
         }
     }
     cout<<endl;
+}
+
+//void AutomaticCalender::
+
+void AutomaticCalender::setThisVarToThisYearCalenderArray(Year *target, int year) {
+    target->year = year;
+//    target->data.months = new Months;
+    target->data.months = new Months[ONE_YEAR_MONTH];
+//    target->data.months->length
+    target->data.months->length = ONE_YEAR_MONTH; //TODO: 此处不对
+    for (int i = 0; i < target->data.months->length; i++) {
+        target->data.months[i].month = new Month;
+        setThisVarToThisMonthCalenderArray(target->data.months[i].month, year, i+1);
+
+//        cout<<"get calender:"<<endl;
+//        printThisMonthCalender(target->data.months[i].month);
+    }
+    cout<<endl;
+}
+
+void AutomaticCalender::printThisYearCalender(Year *target) {
+    for (int i = 0; i <target->data.months->length; ++i) {
+        printThisMonthCalender(target->data.months[i].month);
+    }
 }
 
 //typedef struct {
