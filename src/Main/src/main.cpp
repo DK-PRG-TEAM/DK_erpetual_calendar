@@ -155,7 +155,7 @@ void AutomaticCalender::setThisVarToThisYearCalenderArray(Year *target, int year
 //    target->data.months = new Months;
     target->data.months = new Months[ONE_YEAR_MONTH];
 //    target->data.months->length
-    target->data.months->length = ONE_YEAR_MONTH; //TODO: 此处不对
+    target->data.months->length = ONE_YEAR_MONTH;
     for (int i = 0; i < target->data.months->length; i++) {
         target->data.months[i].month = new Month;
         setThisVarToThisMonthCalenderArray(target->data.months[i].month, year, i+1);
