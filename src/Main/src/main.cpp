@@ -1,4 +1,5 @@
-#include "main.h"
+#include "../include/main.h"
+
 bool isCommonYear(int year);
 int getThisMonthDays(int year,int month);
 int monthToDays(int year, int startMonth, int endMonth);
@@ -108,6 +109,8 @@ void setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
     target->monthNum = month;
     target->data.length = getThisMonthDays(year,month);
 //    target->data.p = isCommonYear(year) ? commonMonth : leapYearMonth;
+//    const int constArray[5] = {1,2,3,4,5};
+//    const int *constArrayTest = constArray; //注意这里的constArray实际上就是constArray第一个数的地址;
     target->data.p = new int [target->data.length];
     for (int i = 0; i < target->data.length; i++) {
         target->data.p[i] = i+1;
