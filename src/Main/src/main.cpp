@@ -18,7 +18,7 @@ int main(){
 //    automaticCalender.printThisMonthCalender(&month);
 
     Year year;
-    automaticCalender.setThisVarToThisYearCalenderArray(&year,2020);
+    year = *automaticCalender.getThisYearCalenderArray(2020);
     automaticCalender.printThisYearCalender(&year);
 //    int y,m,d,y1,m1,d1,togetherYears,sumDays,startDate[3],endDate[3];
 //    printf("Input start date:(EXP:2020,10,1)\n");
@@ -107,41 +107,88 @@ int AutomaticCalender::getThisMonthDays(int year,int month){
 //	}
 //	return resultDays;
 //}
-
-void AutomaticCalender::setThisVarToThisMonthCalenderArray(Month *target, int year, int month){
-    target->yearNum = year;
-    target->monthNum = month;
-    target->data.length = getThisMonthDays(year,month);
-//    target->data.p = isCommonYear(year) ? commonMonth : leapYearMonth;
-//    const int constArray[5] = {1,2,3,4,5};
-//    const int *constArrayTest = constArray; //注意这里的constArray实际上就是constArray第一个数的地址;
-    target->data.p = new int [target->data.length];
-    for (int i = 0; i < target->data.length; i++) {
-        target->data.p[i] = i+1;
+Month *AutomaticCalender::getThisMonthCalenderStruct(int yearNum, int monthNum){
+    Month *month = createNewMonthObject(getThisMonthDays(yearNum,monthNum));
+    month->yearNum = yearNum;
+    month->monthNum = monthNum;
+    for (int i = 0; i < month->data.length; ++i) {
+        month->data.day[i] = i+1;
     }
-//    const int constInt = 123;
-//    const int  *a = &constInt;
-//
-//    const int constArray[1] = {1};
-//    const int *b = &constArray;
-
-//    const int test[10] = {1,2,3};
-//    const int *a = test;
-//    int *&p = &test;
-//    int &t = &test;
-//    const int s = 10;
-//    const int &l = &s;
-//    target = const_cast<int *>(test);
-//    target = commonMonth;
-//    target = isCommonYear(year)?commonMonth:leapYearMonth;
+    return month;
 }
+
+Months *AutomaticCalender::getContinuousManyMonthCalenderStruct(int year, int startMonth, int endMonth){
+    Months *months = createNewMonthsObject(endMonth - startMonth + 1);//例如4~5月, 5 - 4 + 1 = 2月
+    for (int i = 0; i < months->data.length; i++) {
+        months->data.months[i] = *getThisMonthCalenderStruct(year,startMonth+i);
+    }
+    return months;
+}
+
+Year *AutomaticCalender::getThisYearCalenderArray(int yearNum) {
+    Year *year = createNewYearObject();
+    year->yearNum = yearNum;
+    year->data.months = getContinuousManyMonthCalenderStruct(yearNum,1,ONE_YEAR_MONTH);
+    return year;
+//    int *a = new int [10];
+//    a[0]  = 10;
+//    a[0] =
+//    Month *month;
+//    month = new Month [12];
+//    month[0] = *getThisMonthCalenderStruct(2020,12);
+//    Month month[12];
+//    month[0] = new Month;
+//    Months *months = createNewMonthsObject(12);
+//    months->data.months[1].data.day = new int [30];
+//
+//    Year *year = createNewYearObject();
+//    year->data.months[0].
+//    for (int i = 0; i < year->data.months->data.length; i++) {
+//        year->data.months->data.months[i] =
+//        year->data.months = new Months;
+//        year->data.months->data.months = new Month[12];
+//        year->data.months->data.months[1]
+//        year->data.months->data.months[1]
+//        year->data.months[1] = new Month ;
+//        year->data.months->data.months[0] = *getThisMonthCalenderStruct(yearNum, i + 1);
+//        year->data.months = createNewMonthsObject(12);
+//        months->data.months[i] = getThisMonthCalenderStruct(yearNum,i+1);
+//    }
+}
+//void AutomaticCalender::setThisVarToThisMonthCalenderArray(Month *target, int year, int month){ //需要传入已经初始化的target
+//    target->yearNum = year;
+//    target->monthNum = month;
+//    target->data.length = getThisMonthDays(year,month);
+////    target->data.day = isCommonYear(year) ? commonMonth : leapYearMonth;
+////    const int constArray[5] = {1,2,3,4,5};
+////    const int *constArrayTest = constArray; //注意这里的constArray实际上就是constArray第一个数的地址;
+////    target->data.day = new int [target->data.length];
+//    for (int i = 0; i < target->data.length; i++) {
+//        target->data.day[i] = i + 1;
+//    }
+////    const int constInt = 123;
+////    const int  *a = &constInt;
+////
+////    const int constArray[1] = {1};
+////    const int *b = &constArray;
+//
+////    const int test[10] = {1,2,3};
+////    const int *a = test;
+////    int *&day = &test;
+////    int &t = &test;
+////    const int s = 10;
+////    const int &l = &s;
+////    target = const_cast<int *>(test);
+////    target = commonMonth;
+////    target = isCommonYear(year)?commonMonth:leapYearMonth;
+//}
 
 
 void AutomaticCalender::printThisMonthCalender(Month *month){
     cout<<"["<<month->yearNum<<"]"<<"年"<<"第"<<"["<<month->monthNum<<"]"<<"月"<<endl;
     for (int i = 0; i < month->data.length; i++) {
-        cout<<month->data.p[i]<<"\t";
-        if (month->data.p[i] % 5 == 0){
+        cout << month->data.day[i] << "\t";
+        if (month->data.day[i] % 5 == 0){
             cout<<endl;
         }
     }
@@ -150,30 +197,70 @@ void AutomaticCalender::printThisMonthCalender(Month *month){
 
 //void AutomaticCalender::
 
-void AutomaticCalender::setThisVarToThisYearCalenderArray(Year *target, int year) {
-    target->year = year;
+//void AutomaticCalender::setThisVarToThisYearCalenderArray(Year *target, int year) {
 //    target->data.months = new Months;
-    target->data.months = new Months[ONE_YEAR_MONTH];
-//    target->data.months->length
-    target->data.months->length = ONE_YEAR_MONTH;
-    for (int i = 0; i < target->data.months->length; i++) {
-        target->data.months[i].month = new Month;
-        setThisVarToThisMonthCalenderArray(target->data.months[i].month, year, i+1);
-
-//        cout<<"get calender:"<<endl;
-//        printThisMonthCalender(target->data.months[i].month);
-    }
-    cout<<endl;
-}
+//    for (int i = 0; i < 12; i++) {
+//        target->data.months->data.months[i] = new Month;
+//    }
+//    target->year = year;
+////    target->data.months = new Months;
+//    target->data.months = new Months[ONE_YEAR_MONTH];
+////    target->data.months->length
+//    target->data.months->data.length = ONE_YEAR_MONTH;
+//    for (int i = 0; i < target->data.months->data.length; i++) {
+//        target->data.months->data[i].month = new Month;
+//        target->data.months->data.months[i].data;
+//        target->data.months->data.months[i] = new Month;
+//        setThisVarToThisMonthCalenderArray(target->data.months[i].month, year, i+1);
+//
+////        cout<<"get calender:"<<endl;
+////        printThisMonthCalender(target->data.months[i].month);
+//    }
+//    cout<<endl;
+//}
 
 void AutomaticCalender::printThisYearCalender(Year *year) {
-    for (int i = 0; i <year->data.months->length; ++i) {
-        printThisMonthCalender(year->data.months[i].month);
+    for (int i = 0; i <year->data.months->data.length; ++i) {
+        printThisMonthCalender(&year->data.months->data.months[i]);
     }
 }
 
+
+Month *AutomaticCalender::createNewMonthObject(int length) {//创建一个Month实例, 并且进行初始化
+//    Month month;//局部变量, 不可以安全返回其指针, 该变量在return之后变成无效变量
+    Month *month = new Month;//局部指针变量: 可以安全返回
+    month->data.length = length;
+    month->data.day = new int [month->data.length];
+    return month;
+}
+
+Months *AutomaticCalender::createNewMonthsObject(int length) {//创建一个Months实例, 并且进行初始化
+    Months *months = new Months;
+    months->data.length = length;
+    months->data.months = new Month [months->data.length];
+    return months;
+}
+
+Year *AutomaticCalender::createNewYearObject(int length) {//因为一年肯定是12个月, 所以无需长度
+    Year *year;
+    year = new Year;
+    return year;
+}
+
+Years *AutomaticCalender::createNewYearsObject(int length) {
+    Years *years;
+    years->data.length = length;
+    years->data.years = new Year [years->data.length];
+    return years;
+}
+
+
+
+
+
+
 //typedef struct {
-//    int *p;
+//    int *day;
 //    int length;
 //}Month;
 
@@ -192,7 +279,7 @@ void AutomaticCalender::printThisYearCalender(Year *year) {
 //typedef struct {
 //    int monthNum;
 //    struct {
-//        int *p;
+//        int *day;
 //        int length;
 //    }data;
 //}Month;
@@ -215,9 +302,9 @@ void AutomaticCalender::printThisYearCalender(Year *year) {
 
 void test(){
 //    Month *months = new Month[5];
-    Months months;
-    months.month = new Month[5];
-    months.length = 10;
+//    Months months;
+//    months.month = new Month[5];
+//    months.length = 10;
 //    const int test[] = {1};
 //    int test1 = (int) test;
 //    int a[1] = {0};
@@ -225,7 +312,7 @@ void test(){
 //    b = a;
 //    int a = 10;
 //    month.data.length = 10;
-//    month.data.p=&a;
+//    month.data.day=&a;
 //    month.monthNum = 1;
 //    Year year;
 //    year.month[1];
