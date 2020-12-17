@@ -29,7 +29,7 @@ typedef struct {
 
 typedef struct {//这里就不设置起始以及结束月份了, 有可能是乱序的数组
     struct {
-        Month *months;
+        Month **months;
         int length;
     }data;
 }Months;
