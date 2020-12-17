@@ -120,7 +120,7 @@ Month *AutomaticCalender::getThisMonthCalenderStruct(int yearNum, int monthNum){
 Months *AutomaticCalender::getContinuousManyMonthCalenderStruct(int year, int startMonth, int endMonth){
     Months *months = createNewMonthsObject(endMonth - startMonth + 1);//例如4~5月, 5 - 4 + 1 = 2月
     for (int i = 0; i < months->data.length; i++) {
-        months->data.months[i] = *getThisMonthCalenderStruct(year,startMonth+i);
+        months->data.months[i] = getThisMonthCalenderStruct(year,startMonth+i);
     }
     return months;
 }
@@ -221,7 +221,7 @@ void AutomaticCalender::printThisMonthCalender(Month *month){
 
 void AutomaticCalender::printThisYearCalender(Year *year) {
     for (int i = 0; i <year->data.months->data.length; ++i) {
-        printThisMonthCalender(&year->data.months->data.months[i]);
+        printThisMonthCalender(year->data.months->data.months[i]);
     }
 }
 
@@ -237,7 +237,7 @@ Month *AutomaticCalender::createNewMonthObject(int length) {//创建一个Month实例,
 Months *AutomaticCalender::createNewMonthsObject(int length) {//创建一个Months实例, 并且进行初始化
     Months *months = new Months;
     months->data.length = length;
-    months->data.months = new Month [months->data.length];
+    months->data.months = new Month* [length];
     return months;
 }
 
