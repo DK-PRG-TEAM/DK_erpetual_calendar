@@ -8,6 +8,9 @@ using namespace std;
 class AutomaticCalender{
 public:
     void setThisVarToThisMonthCalenderArray(Month *target, int year, int month);
+    Month *getThisMonthCalenderStruct(int yearNum, int monthNum);
+    Months *getContinuousManyMonthCalenderStruct(int year, int startMonth, int endMonth);
+    Year *getThisYearCalenderArray(int yearNum);
     void printThisMonthCalender(Month *month);
     void printManyMonthsCalender(int year, int startMonth, int endMonth);
     void setThisVarToThisMonthsCalenderArray();
@@ -19,5 +22,13 @@ private:
     int getThisMonthDays(int year,int month);
     int monthToDays(int year, int startMonth, int endMonth);
     int manyYearToDays(int startYear,int endYear);
+
+    Month *createNewMonthObject(int length);
     //void getThisMonthCalender(int year, int month);
+    Months *createNewMonthsObject(int length);
+
+    Year *createNewYearObject(int length = ONE_YEAR_MONTH);
+
+    Years *createNewYearsObject(int length);
+
 };
