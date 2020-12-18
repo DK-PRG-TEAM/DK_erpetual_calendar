@@ -20,6 +20,7 @@ int main(){
     Year year;
     year = *automaticCalender.getThisYearCalenderArray(2020);
     automaticCalender.printThisYearCalender(&year);
+
 //    int y,m,d,y1,m1,d1,togetherYears,sumDays,startDate[3],endDate[3];
 //    printf("Input start date:(EXP:2020,10,1)\n");
 //    scanf("%d,%d,%d",&startDate[0],&startDate[1],&startDate[2]);
@@ -301,6 +302,9 @@ Years *AutomaticCalender::createNewYearsObject(int length) {
 
 
 void test(){
+//    Month *month;
+//    Month *&a = month;
+//    a->data.length = 10;
 //    Month *months = new Month[5];
 //    Months months;
 //    months.month = new Month[5];
