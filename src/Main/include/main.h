@@ -17,6 +17,7 @@ public:
     void setThisVarToThisYearCalenderArray(Year *target, int year);
     void printThisYearCalender(Year *year);
     void printManyYearsCalender(int startYear, int endYear);
+    string getThisDayWeekString(int year, int month, int day);
 private:
     bool isCommonYear(int year);
     int getThisMonthDays(int year,int month);
@@ -30,5 +31,7 @@ private:
     Year *createNewYearObject(int length = ONE_YEAR_MONTH);
 
     Years *createNewYearsObject(int length);
+    int getThisDayWeekCode(int year, int month, int day); // 0-星期日, 1-星期一, 2-星期二, 3-星期三, 4-星期四, 5-星期五, 6-星期六
+
 
 };

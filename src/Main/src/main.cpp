@@ -13,6 +13,7 @@
 //void printManyYearsCalender(int startYear, int endYear);
 int main(){
     AutomaticCalender automaticCalender;
+    cout<<automaticCalender.getThisDayWeekString(2020,5,3)<<endl;
 //    Month month;
 //    automaticCalender.setThisVarToThisMonthCalenderArray(&month,2020,2);
 //    automaticCalender.printThisMonthCalender(&month);
@@ -187,9 +188,14 @@ Year *AutomaticCalender::getThisYearCalenderArray(int yearNum) {
 
 void AutomaticCalender::printThisMonthCalender(Month *month){
     cout<<"["<<month->yearNum<<"]"<<"年"<<"第"<<"["<<month->monthNum<<"]"<<"月"<<endl;
+    cout<<"日\t一\t二\t三\t四\t五\t六"<<endl;
+    int displacement = getThisDayWeekCode(month->yearNum,month->monthNum,month->data.day[0]);
+    for (int i = 0; i < displacement; i++) {
+        cout<<"\t";
+    }
     for (int i = 0; i < month->data.length; i++) {
         cout << month->data.day[i] << "\t";
-        if (month->data.day[i] % 5 == 0){
+        if (month->data.day[i] % 7 == 0){
             cout<<endl;
         }
     }
@@ -255,9 +261,16 @@ Years *AutomaticCalender::createNewYearsObject(int length) {
     return years;
 }
 
+int AutomaticCalender::getThisDayWeekCode(int year, int month, int day) {
+    cout<<"get week code:["<<( ((year / 100) / 4) - 2 * (year / 100) + (year % 100) + ( (year % 100) / 4 ) + (13 * ( month + 1 ) ) / 5 + day - 1 ) % 7<<"]"<<"source:[month:"<<month<<"day:"<<day<<"]"<<endl;
+    return ( ((year / 100) / 4) - 2 * (year / 100) + (year % 100) + ( (year % 100) / 4 ) + (13 * ( month + 1 ) ) / 5 + day - 1 ) % 7; // 使用蔡勒公示计算星期几,取值范围0-6，其中0是星期日
+//    return (month - 5) + day < 7?(month - 5) + day:((month - 5) + day) % 7;  //首先，把你想要知道的日期号，加上该月份代号，再除以7，能整除的就是星期日；不能整除的，余数是几，那天就是星期几。如果日期号和月份代号相加的和小于7，那么这个和是几，那天就是星期几。 例如：想知道2006年5月20日是星期几，就把“20”加上2006年5月的代号“0”，所得的和是 20 ，再用20除以7，余数是6，那么2006年5月20号就是星期6。 再举个例子：想知道2006年2月3日是星期几，那么就把“3”加上2月的代号“2”，和为5。由于5小于7，所以2006年2月3日就是星期5。 由于各年的月份代号不尽相同，下面给出各年月份代号的计算方法： 首先要有一本日历，然后随便找一天，例如2006年8月5日，那天是星期6，就把“6”减去“5”，所得的差为“1”，那么2006年8月的代号就是1，其他月份代号的计算方法可以次类推。 这个方法写成公式就是：该年月份代号＝该月星期几－该月日期号。 注意：式中取该月日期号时，必须小于或等于7；取星期日时，数值按7计算，该月星期几的数值要大于日期号数值。
+}
 
 
-
+string AutomaticCalender::getThisDayWeekString(int year, int month, int day) {
+    return week[getThisDayWeekCode(year, month, day)];
+}
 
 
 //typedef struct {
