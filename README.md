@@ -3,7 +3,9 @@
 
 # DK Erpetual Calendar
 
-Dk erpetual calendar has no README describing its purpose; its manifest (CMakeLists.txt) marks it as a C/C++ codebase, built with C++.
+A C++ command-line program that computes the day of the week with Zeller's congruence and prints a demonstration calendar for the year 2020.
+
+**English** · [简体中文](README.zh-CN.md)
 
 [![CI](https://github.com/DK-PRG-TEAM/DK_erpetual_calendar/actions/workflows/ci.yml/badge.svg)](https://github.com/DK-PRG-TEAM/DK_erpetual_calendar/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/DK-PRG-TEAM/DK_erpetual_calendar)](LICENSE)
@@ -24,7 +26,7 @@ Dk erpetual calendar has no README describing its purpose; its manifest (CMakeLi
 
 ## About The Project
 
-Dk erpetual calendar has no README describing its purpose; its manifest (CMakeLists.txt) marks it as a C/C++ codebase, built with C++.
+DK Erpetual Calendar is a small C++20 console program that finds the day of the week for a given date using Zeller's congruence, then reuses that same formula to print an entire year's calendar one month at a time (`src/Main/src/main.cpp`). The month lengths and weekday labels it prints come from lookup tables in `src/Consts/include/consts.h`, including the leap-year table that governs February.
 
 See the [open issues](https://github.com/DK-PRG-TEAM/DK_erpetual_calendar/issues) for planned features and known issues.
 
@@ -32,20 +34,26 @@ See the [open issues](https://github.com/DK-PRG-TEAM/DK_erpetual_calendar/issues
 
 ### Prerequisites
 
-- Git
+- CMake 3.17 or newer (`CMakeLists.txt`: `cmake_minimum_required(VERSION 3.17)`)
+- A C++20-capable compiler, such as GCC or Clang
+- Git, to clone the repository
 
 ### Installation
 
 ```sh
 git clone https://github.com/DK-PRG-TEAM/DK_erpetual_calendar.git
 cd DK_erpetual_calendar
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 ```
 
 ## Usage
 
 ```sh
-DK_erpetual_calendar --help
+./build/src/Main/DK_erpetual_calendar
 ```
+
+The program takes no arguments: `main()` (`src/Main/src/main.cpp`) always runs the same fixed demonstration, resolving the weekday for 2020-05-03 and then printing the full year 2020, one month at a time. A handful of month and weekday labels in that output are stored in a non-UTF-8 source encoding, so they can render as mojibake depending on your terminal's locale.
 
 ## Contributing
 
